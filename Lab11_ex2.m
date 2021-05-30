@@ -1,0 +1,13 @@
+data=csvread("glass_data.csv",1,0);
+A=data(:,2:end-1);
+mu=mean(A);
+A=A-mu;
+ATA=A'*A;
+[VEC,VAL]=eig(ATA);
+lam=diag(VAL);
+figure(1);
+lam=flipud(lam);
+plot(lam)
+y=[0.0;cumsum(lam)]/sum(lam);
+figure(2);
+plot(0:9,y)

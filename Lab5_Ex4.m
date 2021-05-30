@@ -1,0 +1,22 @@
+data=csvread("ford_data.csv",1,1);
+x=data(:,1);
+y=data(:,2);
+n=length(x);
+x=normalize(x,'range');
+y=normalize(y,'range');
+b=0.5;
+m=0;
+r=0.01;
+tol=0.001;
+count=0;
+while tol<vecnorm(epi(b,m,x,y,n)) && count<n*500
+    count=count+1;
+    i=randi([1,n]);
+    gradi=epi(b,m,x,y,i);
+    b=b-r*gradi(1);
+    m=m-r*gradi(2);
+end
+finalb=b
+finalm=m
+finale=e(b,m,x,y)
+finalep=epi(b,m,x,y,n)

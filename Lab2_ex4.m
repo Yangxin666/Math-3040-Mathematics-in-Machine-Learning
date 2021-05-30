@@ -1,0 +1,11 @@
+A=[1,2,3;4,5,6;7,8,9];
+b1=[10;30;50];
+b2=[10;30;51];
+[U,D,V]=svd(A);
+Dplus=1./D';
+Dplus(isinf(Dplus))=0;
+Aplus=V*Dplus*U';
+x1=Aplus*b1;
+norm(A*x1-b1)
+x2=Aplus*b2;
+norm(A*x2-b2)
